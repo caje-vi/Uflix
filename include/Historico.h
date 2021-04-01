@@ -8,7 +8,9 @@
 
 typedef struct Historico tHistorico;
 
-void AddHistorico (Usuario* Id, int IdFilme);
+void MenuHistorico();
+
+void AddHistorico (Usuario* Id, int* IdFilme);
 
 void OrdemNota (Usuario* Id, char Tipo);
 
