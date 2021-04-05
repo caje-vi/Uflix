@@ -4,15 +4,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define ARQUIVOUSUARIO "../data/usuarios"
+#include <ctype.h>
+
 
 typedef struct Usuario tUsuario;
-
-void TestaPonteiroUsuario(tUsuario *x);
 
 void DestroyUsuario(tUsuario *x);
 
 tUsuario *CarregaUsuarios();
+
+tUsuario CadastrasUsuario(int verbosity, tUsuario *user);
+
+static int VerificaId(tUsuario *x, unsigned int test);
+
+static void VerificaPonteiro(void *x);
+
+static int VerificaAlphaNum(char *x);
+
+static int VerificaLogin(tUsuario *user, char *x);
+
 
 
 
