@@ -9,19 +9,33 @@
 
 typedef struct Usuario tUsuario;
 
-void DestroyUsuario(tUsuario *x);
+void ImprimeAllUser(tUsuario *x);
+
+static void MeuPrint(char *imprime, int verbosity);
 
 tUsuario *CarregaUsuarios();
 
-tUsuario CadastrasUsuario(int verbosity, tUsuario *user);
+tUsuario *CadastraUsuario(const int verbosity, tUsuario *user);
 
-static int VerificaId(tUsuario *x, unsigned int test);
+void SalvaDadosUser(tUsuario *user);
+
+int Login(tUsuario *user, const int verbosity);
+
+void ExcluirConta(tUsuario *user, int posicao);
+
+static int VerificaAlphaNum(const char *x);
+
+static int VerificaLogin(tUsuario *user, const char *x);
+
+void DestroyUsuario(tUsuario *x);
 
 static void VerificaPonteiro(void *x);
 
-static int VerificaAlphaNum(char *x);
 
-static int VerificaLogin(tUsuario *user, char *x);
+
+
+
+
 
 
 
