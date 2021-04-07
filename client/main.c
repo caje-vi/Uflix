@@ -10,6 +10,7 @@ int main(int argc, char *argv[]){
     //PosUser = Login(user, verbosity);
     ImprimeAllUser(user);
     SalvaDadosUser(user);
+    DestroyUsuario(user);
     
 
 return 0;

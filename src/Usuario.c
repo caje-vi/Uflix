@@ -160,7 +160,7 @@ int Login(tUsuario *user, const int verbosity){
     return -1;
 }
 
-void ExcluirConta(tUsuario *user, int posicao){
+void ExcluirConta(tUsuario *user, const int posicao){
     user[posicao].Ativa = 0;
 }
 
