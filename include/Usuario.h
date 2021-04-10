@@ -9,7 +9,7 @@
 
 typedef struct Usuario tUsuario;
 
-void ImprimeAllUser(tUsuario *x);
+void ImprimeAllUser(tUsuario *x, int *userAtivos);
 
 /**
  * @brief Imprime uma string se verbosidade for 1
@@ -24,7 +24,7 @@ static void MeuPrint(char *imprime, int verbosity);
  *  
  * @return Ponteiro de tUsuario 
  */
-tUsuario *CarregaUsuarios();
+tUsuario *CarregaUsuarios(int *tamUser, int *userAtivos);
 
 /**
  * @brief Cadastra um novo usuario
@@ -33,14 +33,14 @@ tUsuario *CarregaUsuarios();
  * @param user Ponteiro de tUsuario
  * @return Ponteiro de tUsuario
  */
-tUsuario *CadastraUsuario(const int verbosity, tUsuario *user);
+tUsuario *CadastraUsuario(const int verbosity, tUsuario *user, int *tamUser, int *userAtivos);
 
 /**
  * @brief Salva os dados dos usuario no arquivo usuarios.csv
  * 
  * @param user Ponteiro de tUsuario
  */
-void SalvaDadosUser(tUsuario *user);
+void SalvaDadosUser(tUsuario *user, int *userAtivos);
 
 /**
  * @brief Faz o login em uma conta
@@ -49,7 +49,7 @@ void SalvaDadosUser(tUsuario *user);
  * @param user Ponteiro de tUsuario 
  * @return Posicao do usuario logado ou -1 caso nao exista usuario
  */
-int Login(tUsuario *user, const int verbosity);
+int Login(tUsuario *user, const int verbosity, int *userAtivos);
 
 /**
  * @brief Coloca o campo Ativa so usuario com 0
@@ -74,14 +74,14 @@ static int VerificaAlphaNum(const char *x);
  * @param x string com o usuario a ser verificado
  * @return 1 se nao tiver nenhum usuario com o mesmo nome ou 0 se ja tiver
  */
-static int VerificaLogin(tUsuario *user, const char *x);
+static int VerificaLogin(tUsuario *user, const char *x, int *userAtivos);
 
 /**
  * @brief Libera todo espaco usado pelo ponteiro
  * 
  * @param x Ponteiro de tUsuario
  */
-void DestroyUsuario(tUsuario *x);
+void DestroyUsuario(tUsuario *x, int *tamUser);
 
 /**
  * @brief Verifica se o ponteiro eh valido
