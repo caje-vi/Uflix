@@ -3,8 +3,7 @@
 #define ARQUIVOUSUARIO "data/usuarios.csv"
 #define TAMANHO 20
 
-//static unsigned int QUANTIDADEDEUSUARIOS;
-//static unsigned int USERSATIVOS;
+
 
 typedef struct Usuario
 {
@@ -14,13 +13,13 @@ typedef struct Usuario
     //historico
 }tUsuario;
 
-void ImprimeAllUser(tUsuario *x, int *userAtivos){
+void ImprimeAllUser(tUsuario *x, int *qtdUser){
     int i=0;
 
-    for(i=0; i<*userAtivos; i++){
+    for(i=0; i<*qtdUser; i++){
         printf("%s - %s - %d\n", x[i].login, x[i].password, x[i].Ativa);
     }
-    printf("%d\n\n", *userAtivos);
+    printf("%d\n\n", *qtdUser);
 }
 
 static void MeuPrint(char *imprime, int verbosity){
@@ -29,7 +28,7 @@ static void MeuPrint(char *imprime, int verbosity){
     }
 }
 
-tUsuario *CarregaUsuarios(int *tamUser, int *userAtivos){
+tUsuario *CarregaUsuarios(int *tamUser, int *qtdUser){
     FILE *arquivo;
     tUsuario *user;
     char aux[1000];
@@ -41,7 +40,7 @@ tUsuario *CarregaUsuarios(int *tamUser, int *userAtivos){
 
     if(arquivo == NULL){
         fclose(arquivo);
-        *userAtivos = 0;
+        *qtdUser = 0;
         return user;
     }
 
@@ -64,7 +63,7 @@ tUsuario *CarregaUsuarios(int *tamUser, int *userAtivos){
                 user = realloc(user, sizeof(tUsuario) * (*tamUser));
             }
         }
-        *userAtivos = i;
+        *qtdUser = i;
 
         fclose(arquivo);
         return user;
@@ -72,14 +71,14 @@ tUsuario *CarregaUsuarios(int *tamUser, int *userAtivos){
 
 }
 
-tUsuario *CadastraUsuario(const int verbosity, tUsuario *user, int *tamUser, int *userAtivos){
+tUsuario *CadastraUsuario(const int verbosity, tUsuario *user, int *tamUser, int *qtdUser){
     int i, k;
     char login[100], senha[100], confirmacao[100];
     MeuPrint("Usuario: ", verbosity);
     fgets(login, 100, stdin);
     login[strlen(login) - 1] = '\0';//retira o \n
     if(VerificaAlphaNum(login)){//verifica alpha numerico
-        if(VerificaLogin(user, login, userAtivos)){//verifica se ja existe o mesmo login
+        if(VerificaLogin(user, login, qtdUser)){//verifica se ja existe o mesmo login
             MeuPrint("Senha: ", verbosity);
             fgets(senha, 100, stdin);
             senha[strlen(senha) - 1] = '\0';//retira o \n
@@ -88,12 +87,12 @@ tUsuario *CadastraUsuario(const int verbosity, tUsuario *user, int *tamUser, int
                 fgets(confirmacao, 100, stdin);
                 confirmacao[strlen(confirmacao) - 1] = '\0';//retira o \n
                 if(strcmp( senha, confirmacao) == 0){//verifica se a confirmacao é igual
-                    user[(*userAtivos)].password = strdup(senha);
-                    user[(*userAtivos)].Ativa = 1;
-                    user[(*userAtivos)].login = strdup(login);
-                    printf("%d\n", *userAtivos);
-                    *userAtivos += 1;
-                    printf("%d\n", *userAtivos);
+                    user[(*qtdUser)].password = strdup(senha);
+                    user[(*qtdUser)].Ativa = 1;
+                    user[(*qtdUser)].login = strdup(login);
+                    printf("%d\n", *qtdUser);
+                    *qtdUser += 1;
+                    printf("%d\n", *qtdUser);
                 }
                 else{
                     printf("Senha incorreta.\n");
@@ -115,7 +114,7 @@ tUsuario *CadastraUsuario(const int verbosity, tUsuario *user, int *tamUser, int
         printf("Usuario fora do padrao.\n");
         return user;
     }
-    if(*userAtivos == *tamUser){//aumenta em TAMNHO o ponteiro se for o ultimo usuario disponiivel
+    if(*qtdUser == *tamUser){//aumenta em TAMNHO o ponteiro se for o ultimo usuario disponiivel
         *tamUser += TAMANHO;
         user = realloc(user, sizeof(tUsuario) * (*tamUser));
     }
@@ -123,7 +122,7 @@ tUsuario *CadastraUsuario(const int verbosity, tUsuario *user, int *tamUser, int
     return user;    
 }
 
-void SalvaDadosUser(tUsuario *user, int *userAtivos){
+void SalvaDadosUser(tUsuario *user, int *qtdUser){
     int i;
     FILE *arquivo;
     arquivo = fopen(ARQUIVOUSUARIO, "w");
@@ -132,19 +131,19 @@ void SalvaDadosUser(tUsuario *user, int *userAtivos){
         exit(1);
     }
 
-    for(i=0; i<*userAtivos; i++){
+    for(i=0; i<*qtdUser; i++){
         fprintf(arquivo, "%s,%s,%d\n", 
         user[i].login, user[i].password, user[i].Ativa);
     }
     fclose(arquivo);
 }
 
-int Login(tUsuario *user, const int verbosity, int *userAtivos){
+int Login(tUsuario *user, const int verbosity, int *qtdUser){
     int i;
     char login[100], senha[100];
     MeuPrint("Login: ", verbosity);
     scanf("%s", login);
-    for(i=0; i< *userAtivos; i++){
+    for(i=0; i< *qtdUser; i++){
         if(strcmp(login, user[i].login) == 0 && user[i].Ativa){
             MeuPrint("Senha: ", verbosity);
             scanf("%s", senha);
@@ -176,9 +175,9 @@ static int VerificaAlphaNum(const char *x){
     return 1;
 }
 
-static int VerificaLogin(tUsuario *user, const char *x, int *userAtivos){
+static int VerificaLogin(tUsuario *user, const char *x, int *qtdUser){
     int i;
-    for(i=0; i<*userAtivos; i++){
+    for(i=0; i<*qtdUser; i++){
         if(strcmp(x, user[i].login) == 0){
             return 0;
         }
