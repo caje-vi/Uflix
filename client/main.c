@@ -3,8 +3,11 @@
 int main(int argc, char *argv[]){
 
     int verbosity, PosUser, *tamUser = 0, *userAtivos = 0;
+    char teste;
     tamUser = malloc(sizeof(int));
     userAtivos = malloc(sizeof(int));
+    scanf("%c", &teste);
+    printf("%c\n", teste);
 
     verbosity = atoi(argv[1]);
     tUsuario *user;

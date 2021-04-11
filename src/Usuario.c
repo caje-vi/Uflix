@@ -51,13 +51,11 @@ tUsuario *CarregaUsuarios(int *tamUser, int *qtdUser){
             user[i].password = strdup(strtok(NULL, ","));
             VerificaPonteiro(user[i].password);
             user[i].Ativa = atoi(strtok(NULL, ",\n"));
-            printf("%d\n", i);
             
 
             i++;
 
             if(i == *tamUser){
-                printf("koe\n");
                 *tamUser += TAMANHO;
 
                 user = realloc(user, sizeof(tUsuario) * (*tamUser));
@@ -90,9 +88,7 @@ tUsuario *CadastraUsuario(const int verbosity, tUsuario *user, int *tamUser, int
                     user[(*qtdUser)].password = strdup(senha);
                     user[(*qtdUser)].Ativa = 1;
                     user[(*qtdUser)].login = strdup(login);
-                    printf("%d\n", *qtdUser);
                     *qtdUser += 1;
-                    printf("%d\n", *qtdUser);
                 }
                 else{
                     printf("Senha incorreta.\n");
