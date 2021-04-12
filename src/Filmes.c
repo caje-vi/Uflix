@@ -141,12 +141,14 @@ return opcao;
 
 void Avaliacao(tMetadados* Lista, int i){
     float nota;
-    char data[15];
+    int dia;
+    int mes;
+    int ano;
 
     printf("O que achou de %s? De uma nota entre 0 e 10: ", Lista[i].titulo);
     scanf("%f", &nota);
     printf("\nData: ");
-    scanf("%s", data);
+    scanf("%d/%d/%d", &dia, &mes, &ano);
 };
 
 void Clean(){
