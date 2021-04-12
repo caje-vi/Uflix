@@ -16,6 +16,26 @@ int VerificaAlphaNum(const char *x){
     return 1;
 }
 
+int VerificaAlpha(const char *x){
+    int i;
+    for(i=0; x[i] != '\0'; i++){
+        if(!isalpha(x[i])){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int VerificaNum(const char *x){
+    int i;
+    for(i=0; x[i] != '\0'; i++){
+        if(!isdigit(x[i])){
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void VerificaPonteiro(void *x){
     if(x == NULL){
         printf("Ponterio nao alocado\n");
