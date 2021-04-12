@@ -1,21 +1,26 @@
 #ifndef HISTORICO_H
 #define HISTORICO_H
 
+#define LISTAFILME "data/filmes-pequeno.csv"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "Usuario.h"
+#include <ctype.h>
 
 typedef struct Historico tHistorico;
 
-void MenuHistorico();
+typedef struct Metadados tMetadados;
 
-void AddHistorico (Usuario* Id, int* IdFilme);
+tMetadados* CarregaMetadados();
 
-void OrdemNota (Usuario* Id, char Tipo);
+void ListaFilmes();
 
+int EntradaProximo(int n);
 
+void Clean();
 
+int Dados(int i, tMetadados* filme);
 
-
+void Avaliacao(tMetadados* Lista, int proximo);
 #endif //USUARIO_H//
