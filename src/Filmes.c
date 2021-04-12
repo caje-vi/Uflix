@@ -102,12 +102,10 @@ tMetadados* CarregaMetadados(){
             filme[i].nota = atoi(strtok(NULL, ","));
             filme[i].descri = strdup(strtok(NULL, "\""));
             i++;
-        }
-        
-
+        };
+        filme[i].titulo = NULL;
     }
     fclose(arquivo);
-    return filme;
 
 return filme;
 };
