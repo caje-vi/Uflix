@@ -69,7 +69,7 @@ int EntradaProximo(int n){
                 saida = -1;
                 break;
             }
-            else if(n - 10 <= i && i < n){
+            else if(n - 10 < i && i <= n){
                 saida =  i - 1;
                 break;
             }
