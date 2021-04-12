@@ -1,7 +1,8 @@
 #include "../include/Usuario.h"
+#include "../include/Historico.h"
 
 #define ARQUIVOUSUARIO "data/usuarios.csv"
-#define TAMANHO 20
+#define TAMANHO 30
 
 
 
@@ -10,16 +11,17 @@ typedef struct Usuario
     char *login;
     char *password;
     int Ativa;
-    //historico
+    tHistorico *historico;
+    int *tamHistorico;
 }tUsuario;
 
 void ImprimeAllUser(tUsuario *x, int *qtdUser){
     int i=0;
 
     for(i=0; i<*qtdUser; i++){
-        printf("%s - %s - %d\n", x[i].login, x[i].password, x[i].Ativa);
+        printf("\n%s - %s - %d\t", x[i].login, x[i].password, x[i].Ativa);
+        ImprimeHistorico(x[i].historico);
     }
-    printf("%d\n\n", *qtdUser);
 }
 
 static void MeuPrint(char *imprime, int verbosity){
@@ -51,13 +53,15 @@ tUsuario *CarregaUsuarios(int *tamUser, int *qtdUser){
             user[i].password = strdup(strtok(NULL, ","));
             VerificaPonteiro(user[i].password);
             user[i].Ativa = atoi(strtok(NULL, ",\n"));
-            printf("%d\n", i);
+            user[i].tamHistorico = malloc(sizeof(int));
+            user[i].historico = CarregaHistorico(strtok(NULL, "\n"), user[i].tamHistorico);
+            
+
             
 
             i++;
 
             if(i == *tamUser){
-                printf("koe\n");
                 *tamUser += TAMANHO;
 
                 user = realloc(user, sizeof(tUsuario) * (*tamUser));
@@ -73,7 +77,7 @@ tUsuario *CarregaUsuarios(int *tamUser, int *qtdUser){
 
 tUsuario *CadastraUsuario(const int verbosity, tUsuario *user, int *tamUser, int *qtdUser){
     int i, k;
-    char login[100], senha[100], confirmacao[100];
+    char login[129], senha[129], confirmacao[129];
     MeuPrint("Usuario: ", verbosity);
     fgets(login, 100, stdin);
     login[strlen(login) - 1] = '\0';//retira o \n
@@ -90,9 +94,12 @@ tUsuario *CadastraUsuario(const int verbosity, tUsuario *user, int *tamUser, int
                     user[(*qtdUser)].password = strdup(senha);
                     user[(*qtdUser)].Ativa = 1;
                     user[(*qtdUser)].login = strdup(login);
-                    printf("%d\n", *qtdUser);
+                    user[(*qtdUser)].historico = alocaHistorico(TAMANHO);
+                    int *aux = malloc(sizeof(int));
+                    *aux = TAMANHO;
+                    user[(*qtdUser)].tamHistorico = aux;
+                    setUltimoHistorico(user[(*qtdUser)].historico, 0);
                     *qtdUser += 1;
-                    printf("%d\n", *qtdUser);
                 }
                 else{
                     printf("Senha incorreta.\n");
@@ -118,6 +125,7 @@ tUsuario *CadastraUsuario(const int verbosity, tUsuario *user, int *tamUser, int
         *tamUser += TAMANHO;
         user = realloc(user, sizeof(tUsuario) * (*tamUser));
     }
+    
 
     return user;    
 }
@@ -190,6 +198,8 @@ void DestroyUsuario(tUsuario *x, int *tamUser){
     for(i=0; i<*tamUser; i++){
         free(x[i].login);
         free(x[i].password);
+        free(x[i].tamHistorico);
+        free(x[i]. historico);
     }
     free(x);
 }

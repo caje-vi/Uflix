@@ -1,10 +1,22 @@
 #include "../include/Usuario.h"
 #include "../include/Historico.h"
+#include "../include/Historico.h"
+
 int main(int argc, char *argv[]){
 
-    //int verbosity, PosUser, *tamUser = 0, *userAtivos = 0;
+    int verbosity = 1, PosUser, *tamUser = 0 , *userAtivos = 0;
+    tamUser = malloc(sizeof(int));
+    userAtivos = malloc(sizeof(int));
+    tUsuario *users;
 
-    tMetadados* filmes;
+    users = CarregaUsuarios(tamUser, userAtivos);
+    CadastraUsuario(verbosity, users, tamUser, userAtivos);
+    ImprimeAllUser(users, userAtivos);
+    DestroyUsuario(users, tamUser);
+    free(tamUser);
+    free(userAtivos);
+
+    /*tMetadados* filmes;
     int i = 0;
     filmes = CarregaMetadados();
     /*for(i; i < 10; i++){
@@ -14,8 +26,8 @@ int main(int argc, char *argv[]){
             printf("%d ", filmes[i].ano);
             printf("%.2f ", filmes[i].nota);
             printf("%s \n", filmes[i].descri);
-    }*/
-    ListaFilmes(filmes);
+    }
+    ListaFilmes(filmes);*/
     
 
 return 0;
