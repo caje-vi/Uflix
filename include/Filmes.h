@@ -21,5 +21,7 @@ void Avaliacao(tMetadados* Lista, int proximo);
 
 void Clean();
 
+int CheckAlpha(char* frase);
+
 static void MeuPrint(char *imprime, int verbosity);
 #endif //USUARIO_H//
