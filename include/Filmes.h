@@ -6,8 +6,6 @@
 #include <string.h>
 #include <ctype.h>
 
-typedef struct Historico tHistorico;
-
 typedef struct Metadados tMetadados;
 
 tMetadados* CarregaMetadados();
@@ -16,9 +14,9 @@ void ListaFilmes();
 
 int EntradaProximo(int n);
 
-void Clean();
-
 int Dados(int i, tMetadados* filme);
 
 void Avaliacao(tMetadados* Lista, int proximo);
+
+void Clean();
 #endif //USUARIO_H//
