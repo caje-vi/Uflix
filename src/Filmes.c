@@ -1,6 +1,4 @@
 #include "../include/Filmes.h"
-#include <ctype.h>
-#include <features.h>
 
 typedef struct Metadados
 {
@@ -18,15 +16,15 @@ void ListaFilmes(tMetadados* Lista){
     int proximo;
 
     while(1){
-        id = 1;
+        id = 0;
         while(1){
             for(i = 1; i <= 10; i++){ 
+                id++;
                 if(Lista[id - 1].titulo == NULL){
                     printf("\nFim dos filmes disponiveis \n");
                     break;
                 }
             printf("%d - %s\n",  id, Lista[id - 1].titulo);
-            id++;
             }
             proximo = EntradaProximo(id);
 
@@ -154,3 +152,9 @@ void Avaliacao(tMetadados* Lista, int i){
 void Clean(){
     printf("\e[1;1H\e[2J");
 };
+
+static void MeuPrint(char *imprime, int verbosity){
+    if(verbosity){
+        printf("%s", imprime);
+    }
+}

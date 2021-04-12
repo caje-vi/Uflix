@@ -1,5 +1,6 @@
 #ifndef HISTORICO_H
 #define HISTORICO_H
+
 #define LISTAFILME "data/filmes-grande.csv"
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,4 +20,6 @@ int Dados(int i, tMetadados* filme);
 void Avaliacao(tMetadados* Lista, int proximo);
 
 void Clean();
+
+static void MeuPrint(char *imprime, int verbosity);
 #endif //USUARIO_H//
