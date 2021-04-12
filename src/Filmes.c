@@ -1,4 +1,5 @@
 #include "../include/Filmes.h"
+#include "../include/Utilidades.h"
 
 typedef struct Metadados
 {
