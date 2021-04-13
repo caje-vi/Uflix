@@ -167,4 +167,24 @@ void Avaliacao(tMetadados* Lista, int i){
         }
 
     };
+}
+
+tMetadados *ProcuraFilmes(tMetadados *todos, char *frase){
+    int i, tamanho = 30, alocados = 0;
+    tMetadados *filmes;
+
+    filmes = malloc(sizeof(tMetadados) * tamanho);
+    for(i=0; todos[i].titulo != NULL; i++){
+        if(strstr(todos[i].titulo, frase) != NULL){
+            filmes[alocados] = todos[i];
+            alocados++;
+        }
+
+        if(alocados == tamanho){
+            tamanho += 30;
+            filmes = realloc(filmes, sizeof(tMetadados) * tamanho);
+        }
+    }
+    filmes[alocados].titulo = NULL;
+    return filmes;
 };
