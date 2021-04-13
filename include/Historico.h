@@ -21,6 +21,10 @@ tHistorico *alocaHistorico(int tam);
 
 void setUltimoHistorico(tHistorico *x, int pos);
 
+void *OrdenaData(tHistorico *dados);
+
+void *OrdenaNota(tHistorico *dados);
+
 
 
 
