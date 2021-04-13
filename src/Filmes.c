@@ -141,10 +141,9 @@ return saida;
 };
 
 void Avaliacao(tMetadados* Lista, int i){
+
+    char data[15];
     float nota;
-    int dia;
-    int mes;
-    int ano;
 
     printf("O que achou de %s? De uma nota entre 0 e 10: ", Lista[i].titulo);
     while(1){
@@ -156,6 +155,16 @@ void Avaliacao(tMetadados* Lista, int i){
             break;
         }
     };
+
     printf("\nData: ");
-    scanf("%d/%d/%d", &dia, &mes, &ano);
+    while(1){
+        scanf("%s", data);
+        if(!ValidaData(data)){
+            printf("Digite uma data valida\n");
+        }
+        else{
+            break;
+        }
+
+    };
 };

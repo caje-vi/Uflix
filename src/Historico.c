@@ -19,8 +19,8 @@ void ImprimeHistorico(tHistorico *x){
 }
 
 tHistorico *CarregaHistorico(char *historico, int *tamHistorico){
+
     int dia, mes, ano, i=0;
-    float nota;
     char *token;
 
     tHistorico *novo;
