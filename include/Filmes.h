@@ -11,6 +11,8 @@ typedef struct Metadados tMetadados;
 
 tMetadados* CarregaMetadados();
 
+tMetadados *ProcuraFilmes(tMetadados *todos, char *frase);
+
 void ListaFilmes();
 
 int EntradaProximo(int n);
