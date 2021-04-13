@@ -11,11 +11,11 @@ typedef struct Metadados tMetadados;
 
 tMetadados* CarregaMetadados();
 
+void ListaFilmes(tMetadados* Lista, const int verbosity);
+
 tMetadados *ProcuraFilmes(tMetadados *todos, char *frase);
 
-void ListaFilmes();
-
-int EntradaProximo(int n);
+int EntradaProximo(int n, const int verbosity);
 
 int Dados(int i, tMetadados* filme);
 

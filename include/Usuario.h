@@ -20,8 +20,8 @@ void ImprimeAllUser(tUsuario *x, int *qtdUser);
  * 
  * @param imprime String a ser imprimida.
  * @param verbosity Verbosidade.
- */
-static void MeuPrint(char *imprime, int verbosity);
+ *
+static void MeuPrint(char *imprime, int verbosity);*/
 
 /**
  * @brief Carrega os dados do arquivo usuarios.csv.
