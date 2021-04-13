@@ -211,3 +211,4 @@ static void VerificaPonteiro(void *x){
         exit(1);
     }
 }
+
