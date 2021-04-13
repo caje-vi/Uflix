@@ -10,7 +10,7 @@ typedef struct Metadados
     float nota;
 } tMetadados;
 
-void ListaFilmes(tMetadados* Lista){
+void ListaFilmes(tMetadados* Lista, const int verbosity){
     
     int i;
     int id;
@@ -27,7 +27,7 @@ void ListaFilmes(tMetadados* Lista){
                 }
             printf("%d - %s\n",  id, Lista[id - 1].titulo);
             }
-            proximo = EntradaProximo(id);
+            proximo = EntradaProximo(id, verbosity);
 
             if(proximo == -1){
                 id -= 10;
@@ -50,14 +50,14 @@ void ListaFilmes(tMetadados* Lista){
 
 }
 
-int EntradaProximo(int n){
+int EntradaProximo(int n, const int verbosity){
 
     char opcao[100];
     int saida = 0;
     int i;
-        printf("\nDigite o id do filme que deseja assitir \n");
-        printf("M - mais filmes \n");
-        printf("0 - voltar \n");
+        MeuPrint("\nDigite o id do filme que deseja assitir \n", verbosity);
+        MeuPrint("M - mais filmes \n", verbosity);
+        MeuPrint("0 - voltar \n", verbosity);
 
         while(1) {
             scanf("%s", opcao);

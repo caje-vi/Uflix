@@ -24,11 +24,11 @@ void ImprimeAllUser(tUsuario *x, int *qtdUser){
     }
 }
 
-static void MeuPrint(char *imprime, int verbosity){
+/*static void MeuPrint(char *imprime, int verbosity){
     if(verbosity){
         printf("%s", imprime);
     }
-}
+}*/
 
 tUsuario *CarregaUsuarios(int *tamUser, int *qtdUser){
     FILE *arquivo;
@@ -102,23 +102,23 @@ tUsuario *CadastraUsuario(const int verbosity, tUsuario *user, int *tamUser, int
                     *qtdUser += 1;
                 }
                 else{
-                    printf("Senha incorreta.\n");
+                    MeuPrint("Senha incorreta.\n", verbosity);
                     return user;
                 }
             }
             else{
-                printf("Senha fora do padrao.\n");
+                MeuPrint("Senha fora do padrao.\n", verbosity);
                 return user;
             }
         }
         else{
-            printf("Usuario ja cadastrado.\n");
+            MeuPrint("Usuario ja cadastrado.\n", verbosity);
             return user;
         }
         
     }
     else{
-        printf("Usuario fora do padrao.\n");
+        MeuPrint("Usuario fora do padrao.\n", verbosity);
         return user;
     }
     if(*qtdUser == *tamUser){//aumenta em TAMNHO o ponteiro se for o ultimo usuario disponiivel
@@ -160,13 +160,13 @@ int Login(tUsuario *user, const int verbosity, int *qtdUser){
                 return i;
             }
             else{
-                printf("Senha incorreta.\n");
+                MeuPrint("Senha incorreta.\n", verbosity);
                 return -1;
             }
         }
 
     }
-    printf("Usuario nao cadastado.\n");
+    MeuPrint("Usuario nao cadastado.\n", verbosity);
     return -1;
 }
 

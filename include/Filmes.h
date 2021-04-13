@@ -11,9 +11,9 @@ typedef struct Metadados tMetadados;
 
 tMetadados* CarregaMetadados();
 
-void ListaFilmes();
+void ListaFilmes(tMetadados* Lista, const int verbosity);
 
-int EntradaProximo(int n);
+int EntradaProximo(int n, const int verbosity);
 
 int Dados(int i, tMetadados* filme);
 
