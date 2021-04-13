@@ -1,5 +1,5 @@
+#include "../include/Filmes.h"
 #include "../include/Usuario.h"
-#include "../include/Historico.h"
 #include "../include/Historico.h"
 
 int main(int argc, char *argv[]){

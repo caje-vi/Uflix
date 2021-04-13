@@ -1,13 +1,5 @@
 #include "../include/Filmes.h"
-#include <ctype.h>
-#include <features.h>
-
-typedef struct Historico
-{
-    int historico;
-    float nota;
-    char data[10];
-} tHistorico;
+#include "../include/Utilidades.h"
 
 typedef struct Metadados
 {
@@ -21,26 +13,24 @@ typedef struct Metadados
 void ListaFilmes(tMetadados* Lista){
     
     int i;
-    int n;
+    int id;
     int proximo;
-    tMetadados* filme;
-
 
     while(1){
-        n = 1;
+        id = 0;
         while(1){
             for(i = 1; i <= 10; i++){ 
-            if(Lista[n - 1].titulo == NULL){
-                printf("\nFim dos filmes disponiveis \n");
-                break;
+                id++;
+                if(Lista[id - 1].titulo == NULL){
+                    printf("\nFim dos filmes disponiveis \n");
+                    break;
+                }
+            printf("%d - %s\n",  id, Lista[id - 1].titulo);
             }
-            printf("%d - %s\n",  n, Lista[n - 1].titulo);
-            n++;
-            }
-            proximo = EntradaProximo(n);
+            proximo = EntradaProximo(id);
 
             if(proximo == -1){
-                n -= 10;
+                id -= 10;
                 break;
             }
             if(proximo == -2) {
@@ -51,7 +41,7 @@ void ListaFilmes(tMetadados* Lista){
                     Avaliacao(Lista, proximo);
                 }
                 else {
-                    n -= 10;
+                    id -= 10;
                 };
             }
         }
@@ -62,7 +52,7 @@ void ListaFilmes(tMetadados* Lista){
 
 int EntradaProximo(int n){
 
-    char mais;
+    char opcao[100];
     int saida = 0;
     int i;
         printf("\nDigite o id do filme que deseja assitir \n");
@@ -70,21 +60,22 @@ int EntradaProximo(int n){
         printf("0 - voltar \n");
 
         while(1) {
-            scanf("%s", &mais);
-            if(mais == 'm' || mais == 'M'){
+            scanf("%s", opcao);
+            if(!(strcmp("m", opcao)) || !(strcmp("M", opcao))){
                 saida = -2;
                 break;
-                }
-            i = atoi(&mais);
+            }
+            else if('a' <= opcao[1] && opcao[1] <= 'z') break;
+            i = atoi(opcao);
             if(i == 0){
                 saida = -1;
                 break;
-                }
-            else if(n - 10 <= i && i < n) {
+            }
+            else if(n - 9 <= i && i <= n){
                 saida =  i - 1;
                 break;
             }
-            else {
+            else{
                 printf("Digite uma entrada valida \n");
             }
         }   
@@ -107,17 +98,15 @@ tMetadados* CarregaMetadados(){
     else{
         while(fgets(aux, sizeof(aux), arquivo) != NULL){
             filme[i].titulo = strdup(strtok(aux, ","));
-            filme[i].duracao = atoi(strtok(NULL, ","));
             filme[i].ano = atoi(strtok(NULL, ","));
+            filme[i].duracao = atoi(strtok(NULL, ","));
             filme[i].nota = atoi(strtok(NULL, ","));
             filme[i].descri = strdup(strtok(NULL, "\""));
             i++;
-        }
-        
-
+        };
+        filme[i].titulo = NULL;
     }
     fclose(arquivo);
-    return filme;
 
 return filme;
 };
@@ -136,11 +125,11 @@ int Dados(int i, tMetadados* filme) {
     printf("\n 2- Voltar \n");
 
     while(1){
-        scanf("%d", & opcao);
+        scanf("%d", &opcao);
         if(opcao != 1 && opcao != 2){
             printf("Digite um opcao valida \n");
         } 
-        else {
+        else{
             break;
         }
     }
@@ -150,14 +139,30 @@ return opcao;
 
 void Avaliacao(tMetadados* Lista, int i){
     float nota;
-    char data[15];
+    int dia;
+    int mes;
+    int ano;
 
     printf("O que achou de %s? De uma nota entre 0 e 10: ", Lista[i].titulo);
-    scanf("%f", &nota);
-    printf("\nData:");
-    scanf("%s", data);
+    while(1){
+        scanf("%f", &nota);
+        if(nota < 0 && 10 < nota){
+            printf("Digite uma nota valida \n");
+        }
+        else{
+            break;
+        }
+    };
+    printf("\nData: ");
+    scanf("%d/%d/%d", &dia, &mes, &ano);
 };
 
 void Clean(){
     printf("\e[1;1H\e[2J");
 };
+
+static void MeuPrint(char *imprime, int verbosity){
+    if(verbosity){
+        printf("%s", imprime);
+    }
+}
