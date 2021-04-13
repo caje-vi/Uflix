@@ -11,6 +11,8 @@ void ImprimeHistorico(tHistorico *x);
 
 tHistorico *CarregaHistorico(char *historico, int *tamHistorico);
 
+void salvaHistorico(FILE *arq, tHistorico *dados);
+
 int SomaData(int dia, int mes, int ano);
 
 char *strdata(int somada);

@@ -61,6 +61,18 @@ tHistorico *CarregaHistorico(char *historico, int *tamHistorico){
 
 }
 
+void salvaHistorico(FILE *arq, tHistorico *dados){
+    int i;
+    char *data;
+    for(i=0; dados[i].id_filme != -1; i++){
+        data = strdata(dados[i].data_somada);
+        fprintf(arq, ",%d,%.2f,%s", dados[i].id_filme, dados[i].nota, data);
+        fprintf(arq,",13,4.32,12/43/1232" );
+        free(data);
+    }
+    fprintf(arq, "\n");
+}
+
 int SomaData(int dia, int mes, int ano){
     int transformada;
     transformada = (ano * 10000) + (mes * 100) + dia;
@@ -87,4 +99,46 @@ tHistorico *alocaHistorico(int tam){
 
 void setUltimoHistorico(tHistorico *x, int pos){
     x[pos].id_filme = -1;
+}
+
+void *OrdenaData(tHistorico *dados){
+    int tamanho, troca, i, j;
+    tHistorico memoria;
+    for(i=0; dados[i].id_filme != -1; i++){}
+    tamanho = i;
+	troca=1; /*A variável "troca" será a verificação da troca em cada passada*/
+	for(j=tamanho-1; (j>=1) && (troca==1); j--){
+		troca=0; /*Se o valor continuar 0 na próxima passada quer dizer que não houve troca e a função é encerrada.*/
+		for(i=0; i<j; i++){
+				if(dados[i].data_somada>dados[i+1].data_somada){
+					memoria=dados[i];
+					dados[i]=dados[i+1];
+					dados[i+1]=memoria;
+					troca=1; /*Se houve troca, "troca" recebe 1 para continuar rodando.*/
+			}
+		}
+	}
+
+
+}
+
+void *OrdenaNota(tHistorico *dados){
+    int tamanho, troca, i, j;
+    tHistorico memoria;
+    for(i=0; dados[i].id_filme != -1; i++){}
+    tamanho = i;
+	troca=1; /*A variável "troca" será a verificação da troca em cada passada*/
+	for(j=tamanho-1; (j>=1) && (troca==1); j--){
+		troca=0; /*Se o valor continuar 0 na próxima passada quer dizer que não houve troca e a função é encerrada.*/
+		for(i=0; i<j; i++){
+				if(dados[i].nota>dados[i+1].nota){
+					memoria=dados[i];
+					dados[i]=dados[i+1];
+					dados[i+1]=memoria;
+					troca=1; /*Se houve troca, "troca" recebe 1 para continuar rodando.*/
+			}
+		}
+	}
+
+
 }

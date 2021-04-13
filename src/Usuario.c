@@ -140,8 +140,9 @@ void SalvaDadosUser(tUsuario *user, int *qtdUser){
     }
 
     for(i=0; i<*qtdUser; i++){
-        fprintf(arquivo, "%s,%s,%d\n", 
+        fprintf(arquivo, "%s,%s,%d", 
         user[i].login, user[i].password, user[i].Ativa);
+        salvaHistorico(arquivo, user[i].historico);
     }
     fclose(arquivo);
 }

@@ -11,6 +11,7 @@ int main(int argc, char *argv[]){
 
     users = CarregaUsuarios(tamUser, userAtivos);
     CadastraUsuario(verbosity, users, tamUser, userAtivos);
+    SalvaDadosUser(users, userAtivos);
     ImprimeAllUser(users, userAtivos);
     DestroyUsuario(users, tamUser);
     free(tamUser);
