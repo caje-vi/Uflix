@@ -67,7 +67,6 @@ void salvaHistorico(FILE *arq, tHistorico *dados){
     for(i=0; dados[i].id_filme != -1; i++){
         data = strdata(dados[i].data_somada);
         fprintf(arq, ",%d,%.2f,%s", dados[i].id_filme, dados[i].nota, data);
-        fprintf(arq,",13,4.32,12/43/1232" );
         free(data);
     }
     fprintf(arq, "\n");
