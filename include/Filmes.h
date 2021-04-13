@@ -21,6 +21,8 @@ int Dados(int i, tMetadados* filme);
 
 void Avaliacao(tMetadados* Lista, int proximo);
 
+int CheckNota(const char* nota);
+
 void Clean();
 
 int CheckAlpha(char* frase);
