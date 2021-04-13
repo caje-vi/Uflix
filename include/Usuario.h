@@ -75,7 +75,7 @@ void ExcluirConta(tUsuario *user, const int posicao);
  * @param x String a ser verificada.
  * @return 1 se for alpha-numerico ou 0 se nao for.
  */
-static int VerificaAlphaNum(const char *x);
+//static int VerificaAlphaNum(const char *x);
 
 /**
  * @brief Verifica se nao tem nenhum usuario com o mesmo nome.
@@ -85,7 +85,7 @@ static int VerificaAlphaNum(const char *x);
  * @param qtdUser Ponteiro com a quantidade de usuario salvo, ativos ou nao.
  * @return 1 se nao tiver nenhum usuario com o mesmo nome ou 0 se ja tiver.
  */
-static int VerificaLogin(tUsuario *user, const char *x, int *qtdUser);
+//static int VerificaLogin(tUsuario *user, const char *x, int *qtdUser);
 
 /**
  * @brief Libera todo espaco usado pelo ponteiro.
@@ -100,7 +100,7 @@ void DestroyUsuario(tUsuario *x, int *tamUser);
  * 
  * @param x Ponteiro de tUsuario.
  */
-static void VerificaPonteiro(void *x);
+//static void VerificaPonteiro(void *x);
 
 
 

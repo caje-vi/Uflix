@@ -1,5 +1,5 @@
-#ifndef HISTORICO_H
-#define HISTORICO_H
+#ifndef FILMES_H
+#define FILMES_H
 
 #define LISTAFILME "data/filmes-grande.csv"
 #include <stdio.h>
@@ -17,9 +17,9 @@ tMetadados *ProcuraFilmes(tMetadados *todos, char *frase);
 
 int EntradaProximo(int n, const int verbosity);
 
-int Dados(int i, tMetadados* filme);
+int Dados(int i, tMetadados* filme, const int verbosity);
 
-void Avaliacao(tMetadados* Lista, int proximo);
+void Avaliacao(tMetadados* Lista, int proximo, const int verbosity);
 
 int CheckNota(const char* nota);
 
@@ -27,4 +27,4 @@ void Clean();
 
 int CheckAlpha(char* frase);
 
-#endif //USUARIO_H//
+#endif //FILMES_H

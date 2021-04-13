@@ -1,6 +1,8 @@
-#ifndef UTILIDADES_H
-#define UTILIDADES_H
 
+#include "../include/Utilidades.h"
+#include "../include/Filmes.h"
+#include "../include/Usuario.h"
+#include "../include/Historico.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -98,8 +100,13 @@ void MeuPrint(char *imprime, int verbosity){
     }
 }
 
-void Clean(){
-    printf("\e[1;1H\e[2J");
+void Clean(int verbosity){
+    if(verbosity){
+        printf("\e[1;1H\e[2J");
+    }
+}
+void MenuPrincipal(tUsuario* user, const int posuser,
+        const int verbosity, tMetadados* filmes){
+
 }
 
-#endif //UTILIDADES_H//

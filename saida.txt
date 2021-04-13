@@ -1,0 +1,7 @@
+[1;1H[2J1.Login
+2.Cadastro
+3.Sair
+[1;1H[2JLogin: Senha: Senha incorreta.
+[1;1H[2J1.Login
+2.Cadastro
+3.Sair

@@ -37,8 +37,8 @@ void ListaFilmes(tMetadados* Lista, const int verbosity){
                 continue;
             }
             else if(proximo >= 0) {
-                if(Dados(proximo, Lista) == 1){
-                    Avaliacao(Lista, proximo);
+                if(Dados(proximo, Lista, verbosity) == 1){
+                    Avaliacao(Lista, proximo, verbosity);
                 }
                 else {
                     id -= 10;
@@ -80,7 +80,7 @@ int EntradaProximo(int n, const int verbosity){
             }
             printf("Digite uma entrada valida \n");
         }   
-        Clean();
+        Clean(verbosity);
 return saida;
 };
 
@@ -112,7 +112,7 @@ tMetadados* CarregaMetadados(){
 return filme;
 };
 
-int Dados(int i, tMetadados* filme) {
+int Dados(int i, tMetadados* filme, const int verbosity) {
 
     int saida;
     char opcao[100];
@@ -136,11 +136,11 @@ int Dados(int i, tMetadados* filme) {
         }
     }
     saida = atoi(opcao);
-    Clean();
+    Clean(verbosity);
 return saida;
 };
 
-void Avaliacao(tMetadados* Lista, int i){
+void Avaliacao(tMetadados* Lista, int i, const int verbosity){
 
     char data[15];
     char nota[15];
@@ -169,7 +169,7 @@ void Avaliacao(tMetadados* Lista, int i){
         }
 
     };
-Clean();
+Clean(verbosity);
 }
 
 int CheckNota(const char* nota){
