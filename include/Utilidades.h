@@ -7,6 +7,8 @@ int VerificaNum(const char *x);
 
 void VerificaPonteiro(void *x);
 
+int ValidaData(char *entrada);
+
 void MeuPrint(char *imprime, int verbosity);
 
 void Clean();
