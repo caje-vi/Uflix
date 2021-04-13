@@ -61,23 +61,24 @@ int EntradaProximo(int n){
 
         while(1) {
             scanf("%s", opcao);
-            if(!(strcmp("m", opcao)) || !(strcmp("M", opcao))){
-                saida = -2;
-                break;
+            if(VerificaAlpha(opcao)){
+                if((strcasecmp("m", opcao) == 0)){
+                    saida = -2;
+                    break;
+                }
             }
-            else if('a' <= opcao[1] && opcao[1] <= 'z') break;
-            i = atoi(opcao);
-            if(i == 0){
-                saida = -1;
-                break;
+            if(VerificaNum(opcao)){
+                i = atoi(opcao);
+                if(i == 0){
+                    saida = -1;
+                    break;
+                }
+                else if(n - 9 <= i && i <= n){
+                    saida =  i - 1;
+                    break;
+                }
             }
-            else if(n - 9 <= i && i <= n){
-                saida =  i - 1;
-                break;
-            }
-            else{
-                printf("Digite uma entrada valida \n");
-            }
+            printf("Digite uma entrada valida \n");
         }   
         Clean();
 return saida;
@@ -113,7 +114,8 @@ return filme;
 
 int Dados(int i, tMetadados* filme) {
 
-    int opcao = 0;
+    int saida;
+    char opcao[100];
 
     printf("Titulo: %s \n", filme[i].titulo);
     printf("Ano: %d \n", filme[i].ano);
@@ -125,16 +127,17 @@ int Dados(int i, tMetadados* filme) {
     printf("\n 2- Voltar \n");
 
     while(1){
-        scanf("%d", &opcao);
-        if(opcao != 1 && opcao != 2){
+        scanf("%s", opcao);
+        if((strcmp("1", opcao) != 0) && (strcmp("2", opcao) != 0)){
             printf("Digite um opcao valida \n");
         } 
         else{
             break;
         }
     }
+    saida = atoi(opcao);
     Clean();
-return opcao;
+return saida;
 };
 
 void Avaliacao(tMetadados* Lista, int i){
@@ -156,13 +159,3 @@ void Avaliacao(tMetadados* Lista, int i){
     printf("\nData: ");
     scanf("%d/%d/%d", &dia, &mes, &ano);
 };
-
-void Clean(){
-    printf("\e[1;1H\e[2J");
-};
-
-static void MeuPrint(char *imprime, int verbosity){
-    if(verbosity){
-        printf("%s", imprime);
-    }
-}
