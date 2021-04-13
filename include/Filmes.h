@@ -13,11 +13,15 @@ tMetadados* CarregaMetadados();
 
 void ListaFilmes(tMetadados* Lista, const int verbosity);
 
+tMetadados *ProcuraFilmes(tMetadados *todos, char *frase);
+
 int EntradaProximo(int n, const int verbosity);
 
 int Dados(int i, tMetadados* filme);
 
 void Avaliacao(tMetadados* Lista, int proximo);
+
+int CheckNota(const char* nota);
 
 void Clean();
 

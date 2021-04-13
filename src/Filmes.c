@@ -143,18 +143,20 @@ return saida;
 void Avaliacao(tMetadados* Lista, int i){
 
     char data[15];
-    float nota;
+    char nota[15];
 
     printf("O que achou de %s? De uma nota entre 0 e 10: ", Lista[i].titulo);
+
+    printf("\nNota: ");
     while(1){
-        scanf("%f", &nota);
-        if(nota < 0 && 10 < nota){
-            printf("Digite uma nota valida \n");
+        scanf("%s", nota);
+        if(!CheckNota(nota)){
+            printf("Digite uma nota valida\n");
         }
         else{
             break;
         }
-    };
+    }
 
     printf("\nData: ");
     while(1){
@@ -167,4 +169,44 @@ void Avaliacao(tMetadados* Lista, int i){
         }
 
     };
+Clean();
+}
+
+int CheckNota(const char* nota){
+    int i;
+    int y;
+    int ponto = 0;
+
+    for(i=0; nota[i] != '\0'; i++){
+        if(nota[i] == '.'){
+            ponto++;
+        }
+    }
+    if(VerificaNum(nota) && ponto <= 1){
+       y = atoi(nota); 
+       if(0 <= y && y <= 10){
+           return 1;
+       }
+    }
+return 0;
+};
+
+tMetadados *ProcuraFilmes(tMetadados *todos, char *frase){
+    int i, tamanho = 30, alocados = 0;
+    tMetadados *filmes;
+
+    filmes = malloc(sizeof(tMetadados) * tamanho);
+    for(i=0; todos[i].titulo != NULL; i++){
+        if(strstr(todos[i].titulo, frase) != NULL){
+            filmes[alocados] = todos[i];
+            alocados++;
+        }
+
+        if(alocados == tamanho){
+            tamanho += 30;
+            filmes = realloc(filmes, sizeof(tMetadados) * tamanho);
+        }
+    }
+    filmes[alocados].titulo = NULL;
+    return filmes;
 };
