@@ -65,7 +65,6 @@ tUsuario *CarregaUsuarios(int *tamUser, int *qtdUser){
 }
 
 tUsuario *CadastraUsuario(const int verbosity, tUsuario *user, int *tamUser, int *qtdUser){
-    int i, k;
     char login[129], senha[129], confirmacao[129];
     Clean(verbosity);
     MeuPrint("Usuario: ", verbosity);
@@ -113,7 +112,7 @@ tUsuario *CadastraUsuario(const int verbosity, tUsuario *user, int *tamUser, int
     }
     //aumenta em TAMNHO o ponteiro se for o ultimo usuario disponiivel
     if(*qtdUser == *tamUser){
-        *tamUser += TAMANHO;C
+        *tamUser += TAMANHO;
         user = realloc(user, sizeof(tUsuario) * (*tamUser));
     }
     
