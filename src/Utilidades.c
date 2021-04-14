@@ -102,11 +102,54 @@ void MeuPrint(char *imprime, int verbosity){
 
 void Clean(int verbosity){
     if(verbosity){
-        printf("\e[1;1H\e[2J");
+        system("clear");
+        //printf("\x1b[H\x1b[J");
     }
 }
+
 void MenuPrincipal(tUsuario* user, const int posuser,
-        const int verbosity, tMetadados* filmes){
+                    const int verbosity, tMetadados* filmes){
+    char *auxprincipal, *fraseProcura;
+    auxprincipal = malloc(100 * sizeof(char));
+    fraseProcura = malloc(129 * sizeof(char));
+    tMetadados *FilmesProcurados;
+
+    while(1){
+        Clean(verbosity);
+        MeuPrint("1.Listar filmes\n2.Meu perfil\n3.Procurar filmes\n4.Sair\n", verbosity);
+        while(1){
+            scanf("%s", auxprincipal);
+            if(strcmp(auxprincipal, "1") == 0){
+                Clean(verbosity);
+                ListaFilmes(filmes, verbosity, user, posuser);
+                break;
+            }
+            else if(strcmp(auxprincipal, "2") == 0){
+
+            }
+            else if(strcmp(auxprincipal, "3") == 0){
+                Clean(verbosity);
+                MeuPrint("Digite a palavra/frase procurada: ", verbosity);
+                scanf("%s", fraseProcura);
+                FilmesProcurados = ProcuraFilmes(filmes, fraseProcura);
+                Clean(verbosity);
+                ListaFilmes(FilmesProcurados, verbosity, user, posuser);
+                
+                free(FilmesProcurados);
+                break;
+            }
+            else if(strcmp(auxprincipal, "4") == 0){
+                free(auxprincipal);
+                free(fraseProcura);
+                //break;
+                return;
+            }
+            else{
+                MeuPrint("Digite uma opcao valida.\n", verbosity);
+            }
+        }
+    }
+
 
 }
 

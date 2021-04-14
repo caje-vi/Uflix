@@ -25,6 +25,8 @@ void *OrdenaData(tHistorico *dados);
 
 void *OrdenaNota(tHistorico *dados);
 
+tHistorico *AddHistorico(tHistorico *userHistorico, int *tam, float nota, int idfilme, char *data);
+
 
 
 

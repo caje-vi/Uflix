@@ -76,16 +76,16 @@ tUsuario *CadastraUsuario(const int verbosity, tUsuario *user, int *tamUser, int
     char login[129], senha[129], confirmacao[129];
     Clean(verbosity);
     MeuPrint("Usuario: ", verbosity);
-    fgets(login, 100, stdin);
+    fgets(login, 129, stdin);
     login[strlen(login) - 1] = '\0';//retira o \n
     if(VerificaAlphaNum(login)){//verifica alpha numerico
         if(VerificaLogin(user, login, qtdUser)){//verifica se ja existe o mesmo login
             MeuPrint("Senha: ", verbosity);
-            fgets(senha, 100, stdin);
+            fgets(senha, 129, stdin);
             senha[strlen(senha) - 1] = '\0';//retira o \n
             if(VerificaAlphaNum(senha)){//verifica senha alpha numerica
                 MeuPrint("Confirmar senha: ", verbosity);
-                fgets(confirmacao, 100, stdin);
+                fgets(confirmacao, 129, stdin);
                 confirmacao[strlen(confirmacao) - 1] = '\0';//retira o \n
                 if(strcmp( senha, confirmacao) == 0){//verifica se a confirmacao é igual
                     user[(*qtdUser)].password = strdup(senha);
@@ -189,9 +189,14 @@ void DestroyUsuario(tUsuario *x, int *tamUser){
         free(x[i].login);
         free(x[i].password);
         free(x[i].tamHistorico);
-        free(x[i]. historico);
+        free(x[i].historico);
     }
     free(x);
+}
+
+void adicionarHistorico(tUsuario* user, const int posUser, float nota,
+                         int idfilme, char *data){
+    AddHistorico(user[posUser].historico, user[posUser].tamHistorico, nota, idfilme, data);
 }
 
 

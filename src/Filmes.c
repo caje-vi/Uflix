@@ -1,5 +1,6 @@
 #include "../include/Filmes.h"
 #include "../include/Utilidades.h"
+#include "../include/Usuario.h"
 
 typedef struct Metadados
 {
@@ -8,9 +9,10 @@ typedef struct Metadados
     int duracao;
     int ano;
     float nota;
+    int Id;
 } tMetadados;
 
-void ListaFilmes(tMetadados* Lista, const int verbosity){
+void ListaFilmes(tMetadados* Lista, const int verbosity, tUsuario* user, const int posuser){
     
     int i;
     int id;
@@ -30,7 +32,6 @@ void ListaFilmes(tMetadados* Lista, const int verbosity){
             proximo = EntradaProximo(id, verbosity);
 
             if(proximo == -1){
-                id -= 10;
                 break;
             }
             if(proximo == -2) {
@@ -38,7 +39,7 @@ void ListaFilmes(tMetadados* Lista, const int verbosity){
             }
             else if(proximo >= 0) {
                 if(Dados(proximo, Lista, verbosity) == 1){
-                    Avaliacao(Lista, proximo, verbosity);
+                    Avaliacao(Lista, proximo, verbosity, user, posuser);
                 }
                 else {
                     id -= 10;
@@ -78,7 +79,7 @@ int EntradaProximo(int n, const int verbosity){
                     break;
                 }
             }
-            printf("Digite uma entrada valida \n");
+            MeuPrint("Digite uma entrada valida \n", verbosity);
         }   
         Clean(verbosity);
 return saida;
@@ -103,6 +104,7 @@ tMetadados* CarregaMetadados(){
             filme[i].duracao = atoi(strtok(NULL, ","));
             filme[i].nota = atoi(strtok(NULL, ","));
             filme[i].descri = strdup(strtok(NULL, "\""));
+            filme[i].Id = i;
             i++;
         };
         filme[i].titulo = NULL;
@@ -140,13 +142,18 @@ int Dados(int i, tMetadados* filme, const int verbosity) {
 return saida;
 };
 
-void Avaliacao(tMetadados* Lista, int i, const int verbosity){
+void Avaliacao(tMetadados* Lista, int idfilme, const int verbosity, tUsuario* user, const int posuser){
 
-    char data[15];
-    char nota[15];
+    char *data;
+    char *nota;
+    char *frase;
+    float notaNum;
+    data = malloc(15 * sizeof(char));
+    nota = malloc(15 * sizeof(char));
+    frase = malloc(200 * sizeof(char));
 
-    printf("O que achou de %s? De uma nota entre 0 e 10: ", Lista[i].titulo);
-
+    sprintf(frase, "O que achou de %s? De uma nota entre 0 e 10: ", Lista[idfilme].titulo);
+    MeuPrint(frase, verbosity);
     printf("\nNota: ");
     while(1){
         scanf("%s", nota);
@@ -157,6 +164,8 @@ void Avaliacao(tMetadados* Lista, int i, const int verbosity){
             break;
         }
     }
+    notaNum = atof(nota);
+    
 
     printf("\nData: ");
     while(1){
@@ -169,6 +178,10 @@ void Avaliacao(tMetadados* Lista, int i, const int verbosity){
         }
 
     };
+    adicionarHistorico(user, posuser, notaNum, Lista[idfilme].Id, data);
+    free(nota);
+    free(frase);
+    free(data);
 Clean(verbosity);
 }
 
@@ -177,18 +190,32 @@ int CheckNota(const char* nota){
     int y;
     int ponto = 0;
 
+
     for(i=0; nota[i] != '\0'; i++){
         if(nota[i] == '.'){
             ponto++;
         }
     }
-    if(VerificaNum(nota) && ponto <= 1){
-       y = atoi(nota); 
+    if(VerificaFloat(nota) && ponto <= 1){
+       y = atof(nota); 
+       if(y == -1){
+           return 1;
+       }
        if(0 <= y && y <= 10){
            return 1;
        }
     }
 return 0;
+};
+
+int VerificaFloat(const char* x){
+    int i;
+    for(i=0; x[i] != '\0'; i++){
+        if(!(('0' <= x[i] && x[i] <= '9') || x[i] == '.')){
+            return 0;
+        }
+    }
+    return 1;
 };
 
 tMetadados *ProcuraFilmes(tMetadados *todos, char *frase){
@@ -209,4 +236,13 @@ tMetadados *ProcuraFilmes(tMetadados *todos, char *frase){
     }
     filmes[alocados].titulo = NULL;
     return filmes;
+};
+
+void DestroyMetadados(tMetadados *filmes){
+    int i;
+    for(i=0; filmes[i].titulo != NULL; i++){
+        free(filmes[i].titulo);
+        free(filmes[i].descri);
+    }
+    free(filmes);
 };

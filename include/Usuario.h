@@ -102,6 +102,8 @@ void DestroyUsuario(tUsuario *x, int *tamUser);
  */
 //static void VerificaPonteiro(void *x);
 
+void adicionarHistorico(tUsuario* user, const int posUser, float nota, int idfilme, char *data);
+
 
 
 

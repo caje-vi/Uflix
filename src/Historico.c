@@ -141,3 +141,20 @@ void *OrdenaNota(tHistorico *dados){
 
 
 }
+
+tHistorico *AddHistorico(tHistorico *userHistorico, int *tam, float nota,
+                         int idfilme, char *data){
+    int i, dia, mes, ano;
+    for(i=0; userHistorico[i].id_filme != -1; i++){}
+    userHistorico[i].id_filme = idfilme;
+    userHistorico[i].nota = nota;
+    sscanf(data, "%02d/%02d/%04d", &dia, &mes, &ano);
+    userHistorico[i].data_somada = SomaData(dia, mes, ano);
+    if(i+1 == (*tam)){
+        *tam += TAMANHO;
+        userHistorico = realloc(userHistorico, sizeof(tHistorico)*(*tam));
+    }
+    userHistorico[i+1].id_filme = -1;
+
+
+}

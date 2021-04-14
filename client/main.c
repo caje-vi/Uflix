@@ -27,25 +27,30 @@ int main(int argc, char *argv[]){
                 if(PosUser == -1){
                     break;
                 }
+                else{
+                    MenuPrincipal(users, PosUser, verbosity, filmes);
+                    break;
+                }
             }
             else if(strcmp(auxlogin, "2") == 0){
+                getchar();
                 users = CadastraUsuario(verbosity, 
                         users, tamUser, userAtivos);
                 break;
             }
             else if(strcmp(auxlogin, "3") == 0){
                 SalvaDadosUser(users, userAtivos);
-                DestroyUsuario(users, tamUser);
+                DestroyUsuario(users, userAtivos);
+                DestroyMetadados(filmes);
                 
                 free(tamUser);
                 free(userAtivos);
-                free(filmes);
                 free(auxlogin);
                 
                 return 0;
             }
             else{
-                MeuPrint("Digite uma opcao valida", verbosity);
+                MeuPrint("Digite uma opcao valida.\n", verbosity);
             }
         } 
     }
