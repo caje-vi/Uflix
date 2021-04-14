@@ -246,3 +246,7 @@ void DestroyMetadados(tMetadados *filmes){
     }
     free(filmes);
 };
+
+void ImprimeTitulo(int idfilme, tMetadados *filmes){
+    printf("%s: ", filmes[idfilme].titulo);
+};

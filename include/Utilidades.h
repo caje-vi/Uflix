@@ -21,4 +21,8 @@ void Clean(int verbosity);
 
 void MenuPrincipal(tUsuario* user, const int posuser,
         const int verbosity, tMetadados* filmes);
+
+void MenuLogin(tUsuario* users, const int verbosity, 
+                tMetadados* filmes, int *tamUser, int *userAtivos);
+
 #endif //UTILIDADES_H

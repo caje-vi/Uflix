@@ -3,6 +3,8 @@
 
 #define LISTAFILME "data/filmes-grande.csv"
 #include "../include/Usuario.h"
+#include "../include/Utilidades.h"
+#include "../include/Historico.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -31,5 +33,7 @@ void Clean();
 int CheckAlpha(char* frase);
 
 void DestroyMetadados(tMetadados *filmes);
+
+void ImprimeTitulo(int idfilme, tMetadados *filmes);
 
 #endif //FILMES_H

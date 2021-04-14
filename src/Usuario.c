@@ -1,6 +1,7 @@
 #include "../include/Utilidades.h"
 #include "../include/Usuario.h"
 #include "../include/Historico.h"
+#include "../include/Filmes.h"
 
 #define ARQUIVOUSUARIO "data/usuarios.csv"
 #define TAMANHO 30
@@ -199,4 +200,41 @@ void adicionarHistorico(tUsuario* user, const int posUser, float nota,
     AddHistorico(user[posUser].historico, user[posUser].tamHistorico, nota, idfilme, data);
 }
 
+int MeuPerfil(tUsuario *users, const int PosUser, const int verbosity, tMetadados *filmes){
+    char *auxperfil;
+    auxperfil = malloc(100 * sizeof(char));
 
+
+    while(1){
+        Clean(verbosity)
+        MeuPrint("D ou N- Histórico ordenado por data ou por Nota\n2. Excluir minha conta\n3. Voltar\n", verbosity);
+        while(1){
+            scanf("%s", auxperfil);
+            if(strcasecmp(auxperfil, "D") == 0){
+                OrdenaData(users[PosUser].historico);
+                ImprimeHistorico(users[PosUser].historico, filmes);
+                break;
+            }
+            else if(strcasecmp(auxperfil, "N") == 0){
+                OrdenaNota(users[PosUser].historico);
+                ImprimeHistorico(users[PosUser].historico, filmes);
+                break;
+            }
+            else if(strcmp(auxperfil, "2") == 0){
+                ExcluirConta(users, PosUser);
+                return 1;
+
+            }
+            else if(strcmp(auxperfil, "3") == 0){
+                return 0;
+            }
+            else{
+                MeuPrint("Digite uma opcao valida.\n", verbosity);
+            }
+        }
+    }
+
+
+
+
+}

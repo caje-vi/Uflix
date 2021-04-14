@@ -1,13 +1,16 @@
 #ifndef HISTORICO_H
 #define HISTORICO_H
 
+#include "../include/Filmes.h"
+#include "../include/Usuario.h"
+#include "../include/Utilidades.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 typedef struct Historico tHistorico;
 
-void ImprimeHistorico(tHistorico *x);
+void ImprimeHistorico(tHistorico *x, tMetadados *filmes);
 
 tHistorico *CarregaHistorico(char *historico, int *tamHistorico);
 
@@ -26,7 +29,6 @@ void *OrdenaData(tHistorico *dados);
 void *OrdenaNota(tHistorico *dados);
 
 tHistorico *AddHistorico(tHistorico *userHistorico, int *tam, float nota, int idfilme, char *data);
-
 
 
 

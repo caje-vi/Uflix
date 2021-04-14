@@ -125,7 +125,12 @@ void MenuPrincipal(tUsuario* user, const int posuser,
                 break;
             }
             else if(strcmp(auxprincipal, "2") == 0){
-
+                if(MeuPerfil(user, posuser, verbosity, filmes) == 1){
+                    return;
+                }
+                else{
+                    break;
+                }
             }
             else if(strcmp(auxprincipal, "3") == 0){
                 Clean(verbosity);
@@ -153,3 +158,45 @@ void MenuPrincipal(tUsuario* user, const int posuser,
 
 }
 
+void MenuLogin(tUsuario* users, const int verbosity, tMetadados* filmes, 
+                int *tamUser, int *userAtivos){
+    
+    int PosUser;
+    char* auxlogin;
+    auxlogin = malloc(100 * (sizeof(char)));
+    tamUser = malloc(sizeof(int));
+    userAtivos = malloc(sizeof(int));
+    while(1){
+        Clean(verbosity);
+        MeuPrint("1.Login\n2.Cadastro\n3.Sair\n", verbosity); 
+        while(1){
+            scanf("%s", auxlogin);
+            if(strcmp(auxlogin, "1") == 0){
+                PosUser = Login(users, verbosity, userAtivos);            
+                if(PosUser == -1){
+                    break;
+                }
+                else{
+                    MenuPrincipal(users, PosUser, verbosity, filmes);
+                    break;
+                }
+            }
+            else if(strcmp(auxlogin, "2") == 0){
+                getchar();
+                users = CadastraUsuario(verbosity, 
+                        users, tamUser, userAtivos);
+                break;
+            }
+            else if(strcmp(auxlogin, "3") == 0){
+                free(tamUser);
+                free(userAtivos);
+                free(auxlogin); 
+                
+                return;
+            }
+            else{
+                MeuPrint("Digite uma opcao valida.\n", verbosity);
+            }
+        } 
+    }
+}

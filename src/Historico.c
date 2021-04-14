@@ -1,4 +1,5 @@
 #include "../include/Historico.h"
+#include "../include/Filmes.h"
 
 #define TAMANHO 30
 
@@ -8,12 +9,20 @@ typedef struct Historico{
     int data_somada;
 }tHistorico;
 
-void ImprimeHistorico(tHistorico *x){
+void ImprimeHistorico(tHistorico *x, tMetadados *filmes){
     int i;
     char *data;
+    
     for(i=0; x[i].id_filme != -1; i++){
         data = strdata(x[i].data_somada);
-        printf("%d - %.2f - %s;", x[i].id_filme, x[i].nota, data);
+        printf("%s - ", data);
+        ImprimeTitulo(x[i].id_filme, filmes);
+        if(x[i].nota == -1){
+            printf("Sem avaliacao\n");
+        }
+        else{
+            printf("%.2f", x[i].nota);
+        }
         free(data);
     }
 }
