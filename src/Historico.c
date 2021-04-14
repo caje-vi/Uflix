@@ -1,5 +1,6 @@
 #include "../include/Historico.h"
 #include "../include/Filmes.h"
+#include "../include/Utilidades.h"
 
 #define TAMANHO 30
 
@@ -9,10 +10,10 @@ typedef struct Historico{
     int data_somada;
 }tHistorico;
 
-void ImprimeHistorico(tHistorico *x, tMetadados *filmes){
+void ImprimeHistorico(tHistorico *x, tMetadados *filmes, const int verbosity){
     int i;
-    char *data;
-    
+    char *data, *aux;
+    Clean(verbosity);
     for(i=0; x[i].id_filme != -1; i++){
         data = strdata(x[i].data_somada);
         printf("%s - ", data);
@@ -21,10 +22,24 @@ void ImprimeHistorico(tHistorico *x, tMetadados *filmes){
             printf("Sem avaliacao\n");
         }
         else{
-            printf("%.2f", x[i].nota);
+            printf("%.2f\n", x[i].nota);
         }
         free(data);
     }
+    aux = malloc(100 * sizeof(char));
+    MeuPrint("\n1.Voltar\n", verbosity);
+    while(1){
+        scanf("%s", aux);
+        if(strcmp(aux, "1") == 0){
+            break;
+        }
+        else{
+            MeuPrint("Digite uma opcao valida.\n", verbosity);
+        }
+    }
+    free(aux);
+    
+
 }
 
 tHistorico *CarregaHistorico(char *historico, int *tamHistorico){
@@ -139,7 +154,7 @@ void *OrdenaNota(tHistorico *dados){
 	for(j=tamanho-1; (j>=1) && (troca==1); j--){
 		troca=0; /*Se o valor continuar 0 na próxima passada quer dizer que não houve troca e a função é encerrada.*/
 		for(i=0; i<j; i++){
-				if(dados[i].nota>dados[i+1].nota){
+				if(dados[i].nota<dados[i+1].nota){
 					memoria=dados[i];
 					dados[i]=dados[i+1];
 					dados[i+1]=memoria;
@@ -167,3 +182,4 @@ tHistorico *AddHistorico(tHistorico *userHistorico, int *tam, float nota,
 
 
 }
+

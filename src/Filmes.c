@@ -40,9 +40,20 @@ void ListaFilmes(tMetadados* Lista, const int verbosity, tUsuario* user, const i
             else if(proximo >= 0) {
                 if(Dados(proximo, Lista, verbosity) == 1){
                     Avaliacao(Lista, proximo, verbosity, user, posuser);
+                    if(id < 10){
+                        id = 0;
+                    }
+                    else{
+                        id -= 10;
+                    }
                 }
                 else {
-                    id -= 10;
+                    if(id < 10){
+                        id = 0;
+                    }
+                    else{
+                        id -= 10;
+                    }
                 };
             }
         }
@@ -190,7 +201,6 @@ int CheckNota(const char* nota){
     int y;
     int ponto = 0;
 
-
     for(i=0; nota[i] != '\0'; i++){
         if(nota[i] == '.'){
             ponto++;
@@ -198,7 +208,7 @@ int CheckNota(const char* nota){
     }
     if(VerificaFloat(nota) && ponto <= 1){
        y = atof(nota); 
-       if(y == -1){
+       if(y == -1.0){
            return 1;
        }
        if(0 <= y && y <= 10){
@@ -210,8 +220,15 @@ return 0;
 
 int VerificaFloat(const char* x){
     int i;
+
     for(i=0; x[i] != '\0'; i++){
-        if(!(('0' <= x[i] && x[i] <= '9') || x[i] == '.')){
+        if(i == 0){
+            if(x[i] == '-'){}
+            else if(!(isdigit(x[i]) || x[i] == '.')){
+                return 0;
+            }
+        }
+        else if(!(isdigit(x[i]) || x[i] == '.')){
             return 0;
         }
     }

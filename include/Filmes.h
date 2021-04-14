@@ -2,9 +2,7 @@
 #define FILMES_H
 
 #define LISTAFILME "data/filmes-grande.csv"
-#include "../include/Usuario.h"
-#include "../include/Utilidades.h"
-#include "../include/Historico.h"
+#include "Usuario.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

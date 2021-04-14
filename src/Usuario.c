@@ -22,7 +22,7 @@ void ImprimeAllUser(tUsuario *x, int *qtdUser){
 
     for(i=0; i<*qtdUser; i++){
         printf("\n%s - %s - %d\t", x[i].login, x[i].password, x[i].Ativa);
-        ImprimeHistorico(x[i].historico);
+        //ImprimeHistorico(x[i].historico);
     }
 }
 
@@ -30,8 +30,9 @@ void ImprimeAllUser(tUsuario *x, int *qtdUser){
 tUsuario *CarregaUsuarios(int *tamUser, int *qtdUser){
     FILE *arquivo;
     tUsuario *user;
-    char aux[1000];
+    char *aux;
     int i=0;
+    aux = malloc(10000 * sizeof(char));
     user = malloc(TAMANHO * sizeof(tUsuario));
     VerificaPonteiro(user);
     *tamUser = TAMANHO;
@@ -44,7 +45,7 @@ tUsuario *CarregaUsuarios(int *tamUser, int *qtdUser){
     }
 
     else{
-        while(fgets(aux, sizeof(aux), arquivo) != NULL){
+        while(fgets(aux, 10000, arquivo) != NULL){
             user[i].login = strdup(strtok(aux, ","));
             VerificaPonteiro(user[i].login);
             user[i].password = strdup(strtok(NULL, ","));
@@ -66,6 +67,7 @@ tUsuario *CarregaUsuarios(int *tamUser, int *qtdUser){
         }
         *qtdUser = i;
 
+        free(aux);
         fclose(arquivo);
         return user;
     }
@@ -200,41 +202,6 @@ void adicionarHistorico(tUsuario* user, const int posUser, float nota,
     AddHistorico(user[posUser].historico, user[posUser].tamHistorico, nota, idfilme, data);
 }
 
-int MeuPerfil(tUsuario *users, const int PosUser, const int verbosity, tMetadados *filmes){
-    char *auxperfil;
-    auxperfil = malloc(100 * sizeof(char));
-
-
-    while(1){
-        Clean(verbosity)
-        MeuPrint("D ou N- Histórico ordenado por data ou por Nota\n2. Excluir minha conta\n3. Voltar\n", verbosity);
-        while(1){
-            scanf("%s", auxperfil);
-            if(strcasecmp(auxperfil, "D") == 0){
-                OrdenaData(users[PosUser].historico);
-                ImprimeHistorico(users[PosUser].historico, filmes);
-                break;
-            }
-            else if(strcasecmp(auxperfil, "N") == 0){
-                OrdenaNota(users[PosUser].historico);
-                ImprimeHistorico(users[PosUser].historico, filmes);
-                break;
-            }
-            else if(strcmp(auxperfil, "2") == 0){
-                ExcluirConta(users, PosUser);
-                return 1;
-
-            }
-            else if(strcmp(auxperfil, "3") == 0){
-                return 0;
-            }
-            else{
-                MeuPrint("Digite uma opcao valida.\n", verbosity);
-            }
-        }
-    }
-
-
-
-
+void *DevolveHistorico(tUsuario *users, const int PosUser){
+    return users[PosUser].historico;
 }

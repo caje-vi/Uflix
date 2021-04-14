@@ -164,8 +164,7 @@ void MenuLogin(tUsuario* users, const int verbosity, tMetadados* filmes,
     int PosUser;
     char* auxlogin;
     auxlogin = malloc(100 * (sizeof(char)));
-    tamUser = malloc(sizeof(int));
-    userAtivos = malloc(sizeof(int));
+
     while(1){
         Clean(verbosity);
         MeuPrint("1.Login\n2.Cadastro\n3.Sair\n", verbosity); 
@@ -188,8 +187,6 @@ void MenuLogin(tUsuario* users, const int verbosity, tMetadados* filmes,
                 break;
             }
             else if(strcmp(auxlogin, "3") == 0){
-                free(tamUser);
-                free(userAtivos);
                 free(auxlogin); 
                 
                 return;
@@ -199,4 +196,47 @@ void MenuLogin(tUsuario* users, const int verbosity, tMetadados* filmes,
             }
         } 
     }
+}
+
+int MeuPerfil(tUsuario *users, const int PosUser, const int verbosity, tMetadados *filmes){
+    char *auxperfil;
+    auxperfil = malloc(100 * sizeof(char));
+    tHistorico *test;
+
+    while(1){
+        Clean(verbosity);
+        MeuPrint("D ou N- Histórico ordenado por data ou por Nota\n2. Excluir minha conta\n3. Voltar\n", verbosity);
+        while(1){
+            scanf("%s", auxperfil);
+            if(strcasecmp(auxperfil, "D") == 0){
+                test = (tHistorico *)DevolveHistorico(users, PosUser);
+                OrdenaData(test);
+                ImprimeHistorico(test, filmes, verbosity);
+                break;
+            }
+            else if(strcasecmp(auxperfil, "N") == 0){
+                test = (tHistorico *)DevolveHistorico(users, PosUser);
+                OrdenaNota(test);
+                ImprimeHistorico(test, filmes, verbosity);
+                break;
+            }
+            else if(strcmp(auxperfil, "2") == 0){
+                ExcluirConta(users, PosUser);
+                free(auxperfil);
+                return 1;
+
+            }
+            else if(strcmp(auxperfil, "3") == 0){
+                free(auxperfil);
+                return 0;
+            }
+            else{
+                MeuPrint("Digite uma opcao valida.\n", verbosity);
+            }
+        }
+    }
+
+
+
+
 }

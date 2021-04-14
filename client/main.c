@@ -10,11 +10,13 @@ int main(int argc, char *argv[]){
     tUsuario *users;
 
     if(argc == 2){
-        verbosity = atoi(argc[1]);
+        verbosity = atoi(argv[1]);
     }
     else{
         verbosity = 1;
     }
+    tamUser = malloc(sizeof(int));
+    userAtivos = malloc(sizeof(int));
 
     filmes = CarregaMetadados();
     users = CarregaUsuarios(tamUser, userAtivos);
@@ -24,6 +26,8 @@ int main(int argc, char *argv[]){
     SalvaDadosUser(users, userAtivos);
     DestroyUsuario(users, userAtivos);
     DestroyMetadados(filmes);
+    free(tamUser);
+    free(userAtivos);
     
     
 };

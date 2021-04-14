@@ -1,9 +1,7 @@
 #ifndef UTILIDADES_H
 #define UTILIDADES_H
 
-#include "../include/Filmes.h"
-#include "../include/Usuario.h"
-#include "../include/Historico.h"
+#include "Filmes.h"
 
 int VerificaAlphaNum(const char *x);
 
@@ -19,10 +17,9 @@ void MeuPrint(char *imprime, int verbosity);
 
 void Clean(int verbosity);
 
-void MenuPrincipal(tUsuario* user, const int posuser,
-        const int verbosity, tMetadados* filmes);
+void MenuPrincipal(tUsuario* user, const int posuser, const int verbosity, tMetadados* filmes);
 
-void MenuLogin(tUsuario* users, const int verbosity, 
-                tMetadados* filmes, int *tamUser, int *userAtivos);
+void MenuLogin(tUsuario* users, const int verbosity, tMetadados* filmes, int *tamUser, int *userAtivos);
 
+int MeuPerfil(tUsuario *users, const int PosUser, const int verbosity, tMetadados *filmes);
 #endif //UTILIDADES_H

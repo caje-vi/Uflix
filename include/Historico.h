@@ -1,16 +1,14 @@
 #ifndef HISTORICO_H
 #define HISTORICO_H
 
-#include "../include/Filmes.h"
-#include "../include/Usuario.h"
-#include "../include/Utilidades.h"
+#include "Filmes.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 typedef struct Historico tHistorico;
 
-void ImprimeHistorico(tHistorico *x, tMetadados *filmes);
+void ImprimeHistorico(tHistorico *x, tMetadados *filmes, const int verbosity);
 
 tHistorico *CarregaHistorico(char *historico, int *tamHistorico);
 

@@ -1,9 +1,6 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 
-#include "../include/Filmes.h"
-#include "../include/Utilidades.h"
-#include "../include/Historico.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -107,8 +104,7 @@ void DestroyUsuario(tUsuario *x, int *tamUser);
 
 void adicionarHistorico(tUsuario* user, const int posUser, float nota, int idfilme, char *data);
 
-int MeuPerfil(tUsuario *users, const int PosUser, const int verbosity, tMetadados *filmes);
-
+void *DevolveHistorico(tUsuario *users, const int PosUser);
 
 
 
