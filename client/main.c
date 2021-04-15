@@ -8,7 +8,7 @@ int main(int argc, char *argv[]){
     int verbosity, *tamUser, *userAtivos;
     tMetadados* filmes;
     tUsuario *users;
-
+    
     if(argc == 2){
         verbosity = atoi(argv[1]);
     }
