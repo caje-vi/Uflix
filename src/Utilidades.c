@@ -51,14 +51,13 @@ int ValidaData(const char* data){
 
     sscanf(data, "%2d/%2d/%4d", &dia, &mes, &ano);
     
-    //checar ano
 
     if (ano >= 1900 && ano <= 9999)
     {
-        //checar ano
+
         if (mes >= 1 && mes <= 12)
         {
-            //checar dia
+ 
             if ((dia >= 1 && dia <= 31) && 
                 (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || 
                  mes == 10 || mes == 12)){
@@ -103,7 +102,6 @@ void MeuPrint(char *imprime, int verbosity){
 void Clean(int verbosity){
     if(verbosity){
         system("clear");
-        //printf("\x1b[H\x1b[J");
     }
 }
 
