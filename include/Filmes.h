@@ -85,10 +85,6 @@ int CheckNota(const char* nota);
  */
 int VerificaFloat(const char* x);
 
-/**
-* @brief Limpa o terminal
-*/
-void Clean();
 
 int CheckAlpha(char* frase);
 
