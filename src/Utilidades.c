@@ -126,6 +126,8 @@ void MenuPrincipal(tUsuario* user, const int posuser,
             }
             else if(strcmp(auxprincipal, "2") == 0){
                 if(MeuPerfil(user, posuser, verbosity, filmes) == 1){
+                    free(auxprincipal);
+                    free(fraseProcura);
                     return;
                 }
                 else{
@@ -146,7 +148,6 @@ void MenuPrincipal(tUsuario* user, const int posuser,
             else if(strcmp(auxprincipal, "4") == 0){
                 free(auxprincipal);
                 free(fraseProcura);
-                //break;
                 return;
             }
             else{

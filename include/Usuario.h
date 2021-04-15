@@ -9,26 +9,20 @@
 /**
  * @brief Struct de Usuarios.
  * 
- * 
+ * @var *login String com login.
+ * @var *password String com a senha
+ * @var Ativa Inteiro com 1 para conta ativa ou 0 para conta intiva
+ * @var *historico Ponteiro de tHistorico
+ * @var *tamHistorico Tamanho do historico alocado
 */
 typedef struct Usuario tUsuario;
-
-void ImprimeAllUser(tUsuario *x, int *qtdUser);
-
-/**
- * @brief Imprime uma string se verbosidade for 1.
- * 
- * @param imprime String a ser imprimida.
- * @param verbosity Verbosidade.
- *
-static void MeuPrint(char *imprime, int verbosity);*/
 
 /**
  * @brief Carrega os dados do arquivo usuarios.csv.
  *  
  * @param tamUser Ponteiro com o tamanho do do struct de usuario alocado.
  * @param qtdUser Ponteiro com a quantidade de usuario salvo, ativos ou nao.
- * @return Ponteiro de tUsuario.
+ * @return Ponteiro de tUsuario alocado.
  */
 tUsuario *CarregaUsuarios(int *tamUser, int *qtdUser);
 
@@ -70,14 +64,6 @@ int Login(tUsuario *user, const int verbosity, int *qtdUser);
 void ExcluirConta(tUsuario *user, const int posicao);
 
 /**
- * @brief Verifica se uma string eh inteira de caracteres alpha-numericos.
- * 
- * @param x String a ser verificada.
- * @return 1 se for alpha-numerico ou 0 se nao for.
- */
-//static int VerificaAlphaNum(const char *x);
-
-/**
  * @brief Verifica se nao tem nenhum usuario com o mesmo nome.
  * 
  * @param user Ponteiro de usuario.
@@ -85,7 +71,7 @@ void ExcluirConta(tUsuario *user, const int posicao);
  * @param qtdUser Ponteiro com a quantidade de usuario salvo, ativos ou nao.
  * @return 1 se nao tiver nenhum usuario com o mesmo nome ou 0 se ja tiver.
  */
-//static int VerificaLogin(tUsuario *user, const char *x, int *qtdUser);
+static int VerificaLogin(tUsuario *user, const char *x, int *qtdUser);
 
 /**
  * @brief Libera todo espaco usado pelo ponteiro.
@@ -96,20 +82,23 @@ void ExcluirConta(tUsuario *user, const int posicao);
 void DestroyUsuario(tUsuario *x, int *tamUser);
 
 /**
- * @brief Verifica se o ponteiro eh valido.
- * 
- * @param x Ponteiro de tUsuario.
+ * @brief Chama a função para adicionar um novo filme ao historico.
+ * Pré-Condição: A data tem que estar no formato dd/mm/aaaa.
+ * @param *user Ponteiro de Usuarios.
+ * @param posUser Posicao do array do usuario logado.
+ * @param nota Nota dada pelo usuario ao filme.
+ * @param idfilme Posicao do array de filmes do filme assistido.
+ * @param *data String com a data data pelo usuario.
  */
-//static void VerificaPonteiro(void *x);
-
 void adicionarHistorico(tUsuario* user, const int posUser, float nota, int idfilme, char *data);
 
+/**
+ * @brief Devolve o ponterio de tHistorioco.
+ * Pré-Condição: colocar (tHistorioco *) na hora de chamar a função.
+ * @param *users Ponteiro de usuario.
+ * @param PosUser Posicao do array do usuario logado.
+ * @return Ponteiro de tHistorico
+ */
 void *DevolveHistorico(tUsuario *users, const int PosUser);
-
-
-
-
-
-
 
 #endif //USUARIO_H//

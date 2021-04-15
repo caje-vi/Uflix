@@ -37,9 +37,8 @@ void ImprimeHistorico(tHistorico *x, tMetadados *filmes, const int verbosity){
             MeuPrint("Digite uma opcao valida.\n", verbosity);
         }
     }
-    free(aux);
-    
 
+    free(aux);  
 }
 
 tHistorico *CarregaHistorico(char *historico, int *tamHistorico){
@@ -127,6 +126,7 @@ void setUltimoHistorico(tHistorico *x, int pos){
 void *OrdenaData(tHistorico *dados){
     int tamanho, troca, i, j;
     tHistorico memoria;
+    //pega o tamanho do historico e coloca na variavel tamanho
     for(i=0; dados[i].id_filme != -1; i++){}
     tamanho = i;
 	troca=1; /*A variável "troca" será a verificação da troca em cada passada*/
@@ -174,6 +174,7 @@ tHistorico *AddHistorico(tHistorico *userHistorico, int *tam, float nota,
     userHistorico[i].nota = nota;
     sscanf(data, "%02d/%02d/%04d", &dia, &mes, &ano);
     userHistorico[i].data_somada = SomaData(dia, mes, ano);
+    //Aumenta o tamanho do historico caso seja o ultimo alocado
     if(i+1 == (*tam)){
         *tam += TAMANHO;
         userHistorico = realloc(userHistorico, sizeof(tHistorico)*(*tam));

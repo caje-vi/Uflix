@@ -17,16 +17,6 @@ typedef struct Usuario
     int *tamHistorico;
 }tUsuario;
 
-void ImprimeAllUser(tUsuario *x, int *qtdUser){
-    int i=0;
-
-    for(i=0; i<*qtdUser; i++){
-        printf("\n%s - %s - %d\t", x[i].login, x[i].password, x[i].Ativa);
-        //ImprimeHistorico(x[i].historico);
-    }
-}
-
-
 tUsuario *CarregaUsuarios(int *tamUser, int *qtdUser){
     FILE *arquivo;
     tUsuario *user;
@@ -121,8 +111,9 @@ tUsuario *CadastraUsuario(const int verbosity, tUsuario *user, int *tamUser, int
         MeuPrint("Usuario fora do padrao.\n", verbosity);
         return user;
     }
-    if(*qtdUser == *tamUser){//aumenta em TAMNHO o ponteiro se for o ultimo usuario disponiivel
-        *tamUser += TAMANHO;
+    //aumenta em TAMNHO o ponteiro se for o ultimo usuario disponiivel
+    if(*qtdUser == *tamUser){
+        *tamUser += TAMANHO;C
         user = realloc(user, sizeof(tUsuario) * (*tamUser));
     }
     
@@ -175,8 +166,7 @@ void ExcluirConta(tUsuario *user, const int posicao){
     user[posicao].Ativa = 0;
 }
 
-
-int VerificaLogin(tUsuario *user, const char *x, int *qtdUser){
+static int VerificaLogin(tUsuario *user, const char *x, int *qtdUser){
     int i;
     for(i=0; i<*qtdUser; i++){
         if(strcmp(x, user[i].login) == 0){
@@ -199,7 +189,7 @@ void DestroyUsuario(tUsuario *x, int *tamUser){
 
 void adicionarHistorico(tUsuario* user, const int posUser, float nota,
                          int idfilme, char *data){
-    AddHistorico(user[posUser].historico, user[posUser].tamHistorico, nota, idfilme, data);
+    user[posUser].historico = AddHistorico(user[posUser].historico, user[posUser].tamHistorico, nota, idfilme, data);
 }
 
 void *DevolveHistorico(tUsuario *users, const int PosUser){
