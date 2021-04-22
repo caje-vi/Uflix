@@ -102,7 +102,7 @@ void MeuPrint(char *imprime, int verbosity){
 
 void Clean(int verbosity){
     if(verbosity){
-        //system("clear");
+        system("clear");
     }
 }
 
