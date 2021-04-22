@@ -1,6 +1,9 @@
 # Uflix 
 **Feito por [Jean Calos Vieira Machado](https://github.com/caje-vi) e [Vinicius Moraes de Jesus](https://github.com/ViniciusMdJ)**
 
+![ERRO](https://github.com/caje-vi/Uflix/blob/main/diagramaUflix.png)
+Diagrama de fluxo do trabalho feito
+
 No nosso trabalho nós decidimos carregar e manter todos os dados dos filmes, usuarios e historico em memoria enquanto o programa esta rodando e só ser salvo quando o programa for fechado corretamente, com isso nos decidimos dividir nas seguintes bibliotecas:
 
 ### Filmes.h
