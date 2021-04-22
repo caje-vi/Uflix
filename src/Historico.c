@@ -10,14 +10,15 @@ typedef struct Historico{
     int data_somada;
 }tHistorico;
 
-void ImprimeHistorico(tHistorico *x, tMetadados *filmes, const int verbosity){
+void ImprimeHistorico(tHistorico *x, void *filmes, const int verbosity){
     int i;
     char *data, *aux;
+    tMetadados *movie = (tMetadados *)filmes;
     Clean(verbosity);
     for(i=0; x[i].id_filme != -1; i++){
         data = strdata(x[i].data_somada);
         printf("%s - ", data);
-        ImprimeTitulo(x[i].id_filme, filmes);
+        ImprimeTitulo(x[i].id_filme, movie);
         if(x[i].nota == -1){
             printf("Sem avaliacao\n");
         }
@@ -50,6 +51,7 @@ tHistorico *CarregaHistorico(char *historico, int *tamHistorico){
     *tamHistorico = TAMANHO;
 
     novo = malloc(sizeof(tHistorico) * (*tamHistorico));
+
     if(historico == NULL){
         novo[0].id_filme = -1;
         return novo;
@@ -180,6 +182,7 @@ tHistorico *AddHistorico(tHistorico *userHistorico, int *tam, float nota,
         userHistorico = realloc(userHistorico, sizeof(tHistorico)*(*tam));
     }
     userHistorico[i+1].id_filme = -1;
+    return userHistorico;
 
 
 }

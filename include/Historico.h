@@ -14,7 +14,7 @@ typedef struct Historico tHistorico;
  * @param *filmes Ponteiro de metadados dos filmes.
  * @param verbosity Verbosidade do programa.
  */
-void ImprimeHistorico(tHistorico *x, tMetadados *filmes, const int verbosity);
+void ImprimeHistorico(tHistorico *x, void *filmes, const int verbosity);
 
 /**
  * @brief Carrega os historico salvo no arquivo Usuario.csv

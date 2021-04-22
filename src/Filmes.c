@@ -23,7 +23,7 @@ void ListaFilmes(tMetadados* Lista, const int verbosity, tUsuario* user, const i
         while(1){
             for(i = 1; i <= 10; i++){ 
                 id++;
-                if(Lista[id - 1].titulo == NULL){
+                if(Lista[id - 1].Id == -1){
                     printf("\nFim dos filmes disponiveis \n");
                     break;
                 }
@@ -118,7 +118,7 @@ tMetadados* CarregaMetadados(){
             filme[i].Id = i;
             i++;
         };
-        filme[i].titulo = NULL;
+        filme[i].Id = -1;
     }
     fclose(arquivo);
 
@@ -240,7 +240,7 @@ tMetadados *ProcuraFilmes(tMetadados *todos, char *frase){
     tMetadados *filmes;
 
     filmes = malloc(sizeof(tMetadados) * tamanho);
-    for(i=0; todos[i].titulo != NULL; i++){
+    for(i=0; todos[i].Id != -1; i++){
         if(strstr(todos[i].titulo, frase) != NULL){
             filmes[alocados] = todos[i];
             alocados++;
@@ -251,13 +251,13 @@ tMetadados *ProcuraFilmes(tMetadados *todos, char *frase){
             filmes = realloc(filmes, sizeof(tMetadados) * tamanho);
         }
     }
-    filmes[alocados].titulo = NULL;
+    filmes[alocados].Id = -1;
     return filmes;
 };
 
 void DestroyMetadados(tMetadados *filmes){
     int i;
-    for(i=0; filmes[i].titulo != NULL; i++){
+    for(i=0; filmes[i].Id != -1; i++){
         free(filmes[i].titulo);
         free(filmes[i].descri);
     }

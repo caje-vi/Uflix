@@ -70,13 +70,4 @@ void MenuPrincipal(tUsuario* user, const int posuser, const int verbosity, tMeta
  */
 void MenuLogin(tUsuario* users, const int verbosity, tMetadados* filmes, int *tamUser, int *userAtivos);
 
-/**
- * @brief Funcao que gerencia o Perfil do usuario 
- * @param users Ponteiro para o array de usuarios
- * @param posuser Inteiro correspondente ao indice do usuario
- * @param verbosity Verbosidade
- * @param filmes Ponteiro para o array de filmes
- * @return Retorna 1 caso o usario queira excluir a nota e 0 caso queira voltar
- */
-int MeuPerfil(tUsuario *users, const int PosUser, const int verbosity, tMetadados *filmes);
 #endif //UTILIDADES_H
